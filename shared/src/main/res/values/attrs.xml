@@ -1,0 +1,35 @@
+<!--
+  ~ Copyright 2016 eneim@Eneim Labs, nam@ene.im
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+
+  <declare-styleable name="GoogleIO2016NumberView">
+    <attr format="enum" name="value">
+      <enum name="zero" value="0"/>
+      <enum name="one" value="1"/>
+      <enum name="two" value="2"/>
+      <enum name="three" value="3"/>
+      <enum name="four" value="4"/>
+      <enum name="five" value="5"/>
+      <enum name="six" value="6"/>
+      <enum name="seven" value="7"/>
+      <enum name="eight" value="8"/>
+      <enum name="nine" value="9"/>
+    </attr>
+    <attr format="dimension" name="size"/>
+  </declare-styleable>
+
+</resources>
