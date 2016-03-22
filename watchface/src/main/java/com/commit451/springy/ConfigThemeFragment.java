@@ -80,8 +80,7 @@ public class ConfigThemeFragment extends Fragment {
                     itemHolder.circleView.setImageResource(R.drawable.muzei_icon);
                 } else {
                     theme = Themes.THEMES[position];
-                    ((GradientDrawable) itemHolder.circleView.getDrawable()).setColor(
-                            getResources().getColor(theme.color));
+                    ((GradientDrawable) itemHolder.circleView.getDrawable()).setColor(theme.color);
                 }
                 holder.itemView.setTag(theme.id);
             }

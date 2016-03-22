@@ -53,7 +53,7 @@
             android:name=".WearableWatchFaceConfigActivity"
             android:label="@string/config_label">
             <intent-filter>
-                <action android:name="net.nurik.roman.formwatchface.CONFIG_WATCHFACE" />
+                <action android:name="com.commit451.springy.CONFIG_WATCHFACE" />
                 <category android:name="com.google.android.wearable.watchface.category.WEARABLE_CONFIGURATION" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

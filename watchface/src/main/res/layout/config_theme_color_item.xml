@@ -14,7 +14,8 @@
   limitations under the License.
   -->
 
-<net.nurik.roman.formwatchface.ColorItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.commit451.springy.ColorItemLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:gravity="center">
@@ -26,4 +27,4 @@
         android:layout_margin="8dp"
         android:src="@drawable/circle" />
 
-</net.nurik.roman.formwatchface.ColorItemLayout>
+</com.commit451.springy.ColorItemLayout>
