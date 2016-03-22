@@ -10,8 +10,8 @@ import android.text.format.Time;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.commit451.springy.shared.*;
-import com.commit451.springy.shared.Number;
+import com.commit451.springy.common.*;
+import com.commit451.springy.common.Number;
 
 /**
  * The view which shows how the time will be rendered

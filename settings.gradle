@@ -1,1 +1,1 @@
-include ':app', ':shared', ':configapp'
+include ':watchface', ':common', ':configapp'
