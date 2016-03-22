@@ -14,7 +14,7 @@
   limitations under the License.
   -->
 
-<com.commit451.springy.configapp.ScrimInsetsFrameLayout
+<com.commit451.springy.ScrimInsetsFrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/scrim_insets_frame_layout"
@@ -99,4 +99,4 @@
 
         </android.support.v4.view.ViewPager>
     </LinearLayout>
-</com.commit451.springy.configapp.ScrimInsetsFrameLayout>
+</com.commit451.springy.ScrimInsetsFrameLayout>

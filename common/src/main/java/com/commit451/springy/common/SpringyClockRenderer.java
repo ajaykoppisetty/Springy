@@ -33,7 +33,7 @@ public class SpringyClockRenderer {
         mDigit1Second.animateTo(Number.VALUES[time.second/10]);
     }
 
-    public void onDraw(Canvas canvas) {
+    public void onDraw(Canvas canvas, boolean drawSeconds) {
         int topWidth = canvas.getWidth()/4;
         int topHeight = (int) (canvas.getHeight() * 0.66666667f);
         int bottomWidth = canvas.getWidth()/8;
@@ -42,7 +42,9 @@ public class SpringyClockRenderer {
         mDigit2Hour.onDraw(canvas, topWidth, topHeight, topWidth, 0);
         mDigit1Minute.onDraw(canvas, topWidth, topHeight, 2*topWidth, 0);
         mDigit2Minute.onDraw(canvas, topWidth, topHeight, 3*topWidth, 0);
-        mDigit1Second.onDraw(canvas, bottomWidth, bottomHeight, canvas.getWidth() - (2 * bottomWidth), topHeight);
-        mDigit2Second.onDraw(canvas, bottomWidth, bottomHeight, canvas.getWidth() - bottomWidth, topHeight);
+        if (drawSeconds) {
+            mDigit1Second.onDraw(canvas, bottomWidth, bottomHeight, canvas.getWidth() - (2 * bottomWidth), topHeight);
+            mDigit2Second.onDraw(canvas, bottomWidth, bottomHeight, canvas.getWidth() - bottomWidth, topHeight);
+        }
     }
 }

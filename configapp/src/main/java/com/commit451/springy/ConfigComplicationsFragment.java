@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.commit451.springy.configapp;
+package com.commit451.springy;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;

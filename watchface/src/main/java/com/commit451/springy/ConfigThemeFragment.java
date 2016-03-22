@@ -28,9 +28,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import net.nurik.roman.formwatchface.common.MuzeiArtworkImageLoader;
-import net.nurik.roman.formwatchface.common.config.ConfigHelper;
-import net.nurik.roman.formwatchface.common.config.Themes;
+import com.commit451.springy.common.MuzeiArtworkImageLoader;
+import com.commit451.springy.common.config.ConfigHelper;
+import com.commit451.springy.common.config.Themes;
+
 
 public class ConfigThemeFragment extends Fragment {
     private View mRootView;
@@ -80,7 +81,7 @@ public class ConfigThemeFragment extends Fragment {
                 } else {
                     theme = Themes.THEMES[position];
                     ((GradientDrawable) itemHolder.circleView.getDrawable()).setColor(
-                            getResources().getColor(theme.darkRes));
+                            getResources().getColor(theme.color));
                 }
                 holder.itemView.setTag(theme.id);
             }

@@ -1,4 +1,4 @@
-package com.commit451.springy.configapp;
+package com.commit451.springy;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -50,7 +50,7 @@ public class SpringyNumberView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        mSpringyClockRenderer.onDraw(canvas);
+        mSpringyClockRenderer.onDraw(canvas, true);
         postInvalidate();
     }
 }

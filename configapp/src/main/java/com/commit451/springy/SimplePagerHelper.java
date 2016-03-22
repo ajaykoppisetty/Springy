@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.commit451.springy.configapp;
+package com.commit451.springy;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;

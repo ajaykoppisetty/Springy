@@ -26,7 +26,7 @@
         android:alpha="0.4"
         android:scaleType="centerCrop" />
 
-    <com.commit451.springy.configapp.SpringyNumberView
+    <com.commit451.springy.SpringyNumberView
         android:id="@+id/clock"
         android:layout_width="300dp"
         android:layout_height="120dp"

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.commit451.springy.configapp;
+package com.commit451.springy;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -44,8 +44,8 @@ import android.widget.ImageView;
 
 import com.commit451.springy.common.MathUtil;
 import com.commit451.springy.common.MuzeiArtworkImageLoader;
-import com.commit451.springy.common.config.Themes;
 import com.commit451.springy.common.config.ConfigHelper;
+import com.commit451.springy.common.config.Themes;
 import com.commit451.springy.common.config.UpdateConfigIntentService;
 
 import java.util.ArrayList;
