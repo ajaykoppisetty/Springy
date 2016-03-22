@@ -29,7 +29,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 
 /**
- * Created by eneim on 3/4/16.
+ * The class that draws the number
  */
 public final class NumberDrawer {
 
@@ -38,27 +38,8 @@ public final class NumberDrawer {
   private static final Path t = new Path();
   private static final Matrix m = new Matrix();
   private static float od;
-  protected static ColorFilter cf = null;
 
-  private static @ColorInt int strokeColor = Color.parseColor("#78909C");
-
-  /**
-   * IMPORTANT: Due to the static usage of this class this
-   * method sets the tint color statically. So it is highly
-   * recommended to call the clearColorTint method when you
-   * have finished drawing.
-   * <p/>
-   * Sets the color to use when drawing the SVG. This replaces
-   * all parts of the drawable which are not completely
-   * transparent with this color.
-   */
-  public static void setColorTint(int color) {
-    cf = new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
-  }
-
-  public static void clearColorTint(int color) {
-    cf = null;
-  }
+  private static @ColorInt int strokeColor = Color.parseColor("#00ffff");
 
   public static void draw(Canvas c, int w, int h, int dx, int dy, PathParser.PathDataNode[] nodes) {
     float ow = 132f;
@@ -148,9 +129,7 @@ public final class NumberDrawer {
 
     @Override public void draw(Canvas c) {
       Rect b = getBounds();
-      NumberDrawer.cf = colorFilter;
       NumberDrawer.draw(c, b.width(), b.height(), b.left, b.top, Number.getNodes(number));
-      NumberDrawer.cf = null;
     }
 
     @Override public void setAlpha(int i) {
@@ -169,10 +148,6 @@ public final class NumberDrawer {
   private static void r(Integer... o) {
     p.reset();
     ps.reset();
-    if (cf != null) {
-      p.setColorFilter(cf);
-      ps.setColorFilter(cf);
-    }
     p.setAntiAlias(true);
     ps.setAntiAlias(true);
     p.setStyle(Paint.Style.FILL);

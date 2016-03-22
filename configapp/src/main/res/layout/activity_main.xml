@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -12,30 +12,29 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.commit451.springy.configapp.MainActivity">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
 
-    <com.commit451.springy.shared.GoogleIO2016NumberView
-        android:id="@+id/second0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="4dp"
-        app:size="@dimen/default_number_size"
-        app:value="zero"
-        />
+        <com.commit451.springy.shared.GoogleIO2016NumberView
+            android:id="@+id/second0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            app:size="@dimen/default_number_size"
+            app:value="zero"
+            />
 
-    <com.commit451.springy.shared.GoogleIO2016NumberView
-        android:id="@+id/second1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="4dp"
-        app:size="@dimen/default_number_size"
-        app:value="one"
-        />
+        <com.commit451.springy.shared.GoogleIO2016NumberView
+            android:id="@+id/second1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            app:size="@dimen/default_number_size"
+            app:value="one"
+            />
 
 
     </LinearLayout>
@@ -43,5 +42,6 @@
     <com.commit451.springy.configapp.SpringyNumberView
         android:id="@+id/springy"
         android:layout_width="200dp"
-        android:layout_height="200dp"/>
+        android:layout_height="200dp"
+        android:background="@android:color/black"/>
 </LinearLayout>

@@ -20,28 +20,13 @@ public class SpringyNumber {
 
     private PathParser.PathDataNode[] mNodes;
 
-    private int mSize;
-
-    private int mWidth;
-    private int mHeight;
-    private int mPaddingLeft;
-    private int mPaddingRight;
-    private int mPaddingTop;
-    private int mPaddingBottom;
-
     private PathParser.PathDataNode[] nodesFrom;
     private PathParser.PathDataNode[] nodesTo;
     private TypeEvaluator evaluator;
     private ValueAnimator animator;
 
-    public SpringyNumber(Number number, int width, int height, int padding) {
+    public SpringyNumber(Number number) {
         mNumber = number;
-        mWidth = width;
-        mHeight = height;
-        mPaddingLeft = padding;
-        mPaddingRight = padding;
-        mPaddingTop = padding;
-        mPaddingBottom = padding;
         reset();
     }
 
@@ -84,20 +69,12 @@ public class SpringyNumber {
 
     public void reset() {
         mNodes = Number.getNodes(mNumber);
-        //invalidate();
     }
 
-    public void onDraw(Canvas canvas) {
-        int width = mWidth - mPaddingLeft - mPaddingRight;
-        int height = mHeight - mPaddingTop - mPaddingBottom;
-        if (width < 0) {
-            width = mSize;
-        }
+    public void onDraw(Canvas canvas, int width, int height, int paddingLeft, int paddingRight, int paddingTop, int paddingBottom) {
+        int finalWidth = width - paddingLeft - paddingRight;
+        int finalHeight = height - paddingTop - paddingBottom;
 
-        if (height < 0) {
-            height = mSize;
-        }
-
-        NumberDrawer.draw(canvas, width, height, mPaddingLeft, mPaddingTop, mNodes);
+        NumberDrawer.draw(canvas, finalWidth, finalHeight, paddingLeft, paddingTop, mNodes);
     }
 }

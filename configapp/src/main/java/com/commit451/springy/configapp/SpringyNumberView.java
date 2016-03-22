@@ -44,8 +44,8 @@ public class SpringyNumberView extends View {
     }
 
     private void init() {
-        mDigit1Second = new SpringyNumber(Number.ZERO, 100, 100, 100);
-        mDigit2Second = new SpringyNumber(Number.ZERO, 100, 100, 100);
+        mDigit1Second = new SpringyNumber(Number.ZERO);
+        mDigit2Second = new SpringyNumber(Number.ZERO);
         setWillNotDraw(false);
     }
 
@@ -58,7 +58,10 @@ public class SpringyNumberView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        mDigit1Second.onDraw(canvas);
-        mDigit2Second.onDraw(canvas);
+        int width = canvas.getWidth()/2;
+        int height = canvas.getHeight()/2;
+        mDigit1Second.onDraw(canvas, width, height, 0,0,0,0);
+        mDigit2Second.onDraw(canvas, width, height, 0,0,0,0);
+        postInvalidate();
     }
 }
