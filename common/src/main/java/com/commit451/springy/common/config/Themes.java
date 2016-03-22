@@ -17,11 +17,11 @@ public class Themes {
     private static Map<String, Theme> THEMES_BY_ID = new HashMap<>();
 
     public static final Theme[] THEMES = new Theme[] {
-            new Theme("blue", Color.parseColor("#2A36B1")),
-            new Theme("teal", Color.parseColor("#00695C")),
-            new Theme("red", Color.parseColor("#A52714")),
-            new Theme("yellow", Color.parseColor("#F09300")),
-            new Theme("gray", Color.parseColor("#424242"))
+            new Theme("red", Color.parseColor("#ED524B")),
+            new Theme("purple", Color.parseColor("#5C61BE")),
+            new Theme("grey", Color.parseColor("#AFBFC8")),
+            new Theme("cyan", Color.parseColor("#88EFF0")),
+            new Theme("blue", Color.parseColor("#1DC2D7"))
     };
 
     public static Theme MUZEI_THEME = new Theme("muzei", 0);

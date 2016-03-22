@@ -76,14 +76,16 @@ public class SpringyNumberView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        int width = canvas.getWidth()/6;
-        int height = canvas.getHeight();
-        mDigit1Hour.onDraw(canvas, width, height, 0, 0);
-        mDigit2Hour.onDraw(canvas, width, height, width, 0);
-        mDigit1Minute.onDraw(canvas, width, height, 2*width, 0);
-        mDigit2Minute.onDraw(canvas, width, height, 3*width, 0);
-        mDigit1Second.onDraw(canvas, width, height, 4*width, 0);
-        mDigit2Second.onDraw(canvas, width, height, 5*width, 0);
+        int topWidth = canvas.getWidth()/4;
+        int topHeight = (int) (canvas.getHeight() * 0.66666667f);
+        int bottomWidth = canvas.getWidth()/8;
+        int bottomHeight = (int) (canvas.getHeight() * 0.333333333f);
+        mDigit1Hour.onDraw(canvas, topWidth, topHeight, 0, 0);
+        mDigit2Hour.onDraw(canvas, topWidth, topHeight, topWidth, 0);
+        mDigit1Minute.onDraw(canvas, topWidth, topHeight, 2*topWidth, 0);
+        mDigit2Minute.onDraw(canvas, topWidth, topHeight, 3*topWidth, 0);
+        mDigit1Second.onDraw(canvas, bottomWidth, bottomHeight, canvas.getWidth() - (2 * bottomWidth), topHeight);
+        mDigit2Second.onDraw(canvas, bottomWidth, bottomHeight, canvas.getWidth() - bottomWidth, topHeight);
         postInvalidate();
     }
 }
