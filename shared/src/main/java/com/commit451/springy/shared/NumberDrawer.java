@@ -32,141 +32,140 @@ import android.support.annotation.ColorInt;
  * The class that draws the number
  */
 public final class NumberDrawer {
+    private static final Paint paint = new Paint();
+    private static final Path path = new Path();
+    private static final Matrix matrix = new Matrix();
+    private static float od;
+    @ColorInt
+    private static int strokeColor = Color.parseColor("#ffffff");
 
-  private static final Paint p = new Paint();
-  private static final Paint ps = new Paint();
-  private static final Path t = new Path();
-  private static final Matrix m = new Matrix();
-  private static float od;
+    public static void draw(Canvas canvas, int width, int height, int dx, int dy, PathParser.PathDataNode[] nodes) {
+        //I think these are the defaults? not well documented...
+        float ow = 132f;
+        float oh = 132f;
 
-  private static @ColorInt int strokeColor = Color.parseColor("#ffffff");
+        od = (width / ow < height / oh) ? width / ow : height / oh;
 
-  public static void draw(Canvas c, int w, int h, int dx, int dy, PathParser.PathDataNode[] nodes) {
-    float ow = 132f;
-    float oh = 132f;
+        r();
+        canvas.save();
+        canvas.translate((width - od * ow) / 2f + dx, (height - od * oh) / 2f + dy);
 
-    od = (w / ow < h / oh) ? w / ow : h / oh;
+        matrix.reset();
+        matrix.setScale(od, od);
 
-    r();
-    c.save();
-    c.translate((w - od * ow) / 2f + dx, (h - od * oh) / 2f + dy);
+        canvas.save();
+        paint.setColor(Color.argb(0, 0, 0, 0));
+        paint.setStrokeCap(Paint.Cap.BUTT);
+        paint.setStrokeJoin(Paint.Join.MITER);
+        paint.setStrokeMiter(4.0f * od);
+        canvas.scale(1.0f, 1.0f);
+        canvas.save();
+        paint.setColor(strokeColor);
+        paint.setStrokeWidth(4.0f * od);
+        paint.setStrokeJoin(Paint.Join.ROUND);
+        path.reset();
 
-    m.reset();
-    m.setScale(od, od);
+        for (PathParser.PathDataNode node : nodes) {
+            if (node.type == 'M') {
+                path.moveTo(node.params[0], node.params[1]);
+            } else if (node.type == 'L') {
+                path.lineTo(node.params[0], node.params[1]);
+            } else if (node.type == 'C') {
+                path.cubicTo(node.params[0], node.params[1], node.params[2], node.params[3], node.params[4],
+                        node.params[5]);
+            }
+        }
 
-    c.save();
-    ps.setColor(Color.argb(0, 0, 0, 0));
-    ps.setStrokeCap(Paint.Cap.BUTT);
-    ps.setStrokeJoin(Paint.Join.MITER);
-    ps.setStrokeMiter(4.0f * od);
-    c.scale(1.0f, 1.0f);
-    c.save();
-    p.setColor(Color.argb(0, 0, 0, 0));
-    ps.setColor(strokeColor);
-    ps.setStrokeWidth(4.0f * od);
-    ps.setStrokeJoin(Paint.Join.ROUND);
-    t.reset();
+        path.transform(matrix);
+        canvas.drawPath(path, paint);
+        canvas.restore();
+        r(3, 2, 0, 1);
+        paint.setColor(Color.parseColor("#e35444"));
+        paint.setStrokeWidth(4.0f * od);
+        paint.setStrokeJoin(Paint.Join.ROUND);
+        canvas.restore();
+        r();
 
-    for (PathParser.PathDataNode node : nodes) {
-      if (node.type == 'M') {
-        t.moveTo(node.params[0], node.params[1]);
-      } else if (node.type == 'L') {
-        t.lineTo(node.params[0], node.params[1]);
-      } else if (node.type == 'C') {
-        t.cubicTo(node.params[0], node.params[1], node.params[2], node.params[3], node.params[4],
-            node.params[5]);
-      }
+        canvas.restore();
     }
 
-    t.transform(m);
-    c.drawPath(t, p);
-    c.drawPath(t, ps);
-    c.restore();
-    r(3, 2, 0, 1);
-    p.setColor(Color.argb(0, 0, 0, 0));
-    ps.setColor(Color.parseColor("#e35444"));
-    ps.setStrokeWidth(4.0f * od);
-    ps.setStrokeJoin(Paint.Join.ROUND);
-    c.restore();
-    r();
-
-    c.restore();
-  }
-
-  public static Drawable getDrawable(Number number, int size) {
-    return new NumberDrawable(number, size);
-  }
-
-  public static Drawable getTintedDrawable(Number number, int size, int color) {
-    return new NumberDrawable(number, size, color);
-  }
-
-  public static class NumberDrawable extends Drawable {
-    private int size = 0;
-    private ColorFilter colorFilter = null;
-
-    private Number number;
-
-    public NumberDrawable(Number number, int size) {
-      this.number = number;
-      this.size = size;
-      setBounds(0, 0, size, size);
-      invalidateSelf();
+    public static Drawable getDrawable(Number number, int size) {
+        return new NumberDrawable(number, size);
     }
 
-    public NumberDrawable(Number number, int size, int color) {
-      this(number, size);
-      colorFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
+    public static Drawable getTintedDrawable(Number number, int size, int color) {
+        return new NumberDrawable(number, size, color);
     }
 
-    @Override public int getIntrinsicHeight() {
-      return size;
+    public static class NumberDrawable extends Drawable {
+        private int size = 0;
+        private ColorFilter colorFilter = null;
+
+        private Number number;
+
+        public NumberDrawable(Number number, int size) {
+            this.number = number;
+            this.size = size;
+            setBounds(0, 0, size, size);
+            invalidateSelf();
+        }
+
+        public NumberDrawable(Number number, int size, int color) {
+            this(number, size);
+            colorFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
+        }
+
+        @Override
+        public int getIntrinsicHeight() {
+            return size;
+        }
+
+        @Override
+        public int getIntrinsicWidth() {
+            return size;
+        }
+
+        @Override
+        public void draw(Canvas c) {
+            Rect b = getBounds();
+            NumberDrawer.draw(c, b.width(), b.height(), b.left, b.top, Number.getNodes(number));
+        }
+
+        @Override
+        public void setAlpha(int i) {
+        }
+
+        @Override
+        public void setColorFilter(ColorFilter c) {
+            colorFilter = c;
+            invalidateSelf();
+        }
+
+        @Override
+        public int getOpacity() {
+            return 0;
+        }
     }
 
-    @Override public int getIntrinsicWidth() {
-      return size;
+    private static void r(Integer... o) {
+        paint.reset();
+        paint.setAntiAlias(true);
+        paint.setStyle(Paint.Style.STROKE);
+        for (Integer i : o) {
+            switch (i) {
+                case 0:
+                    paint.setStrokeJoin(Paint.Join.MITER);
+                    break;
+                case 1:
+                    paint.setStrokeMiter(4.0f * od);
+                    break;
+                case 2:
+                    paint.setStrokeCap(Paint.Cap.BUTT);
+                    break;
+                case 3:
+                    paint.setColor(Color.argb(0, 0, 0, 0));
+                    break;
+            }
+        }
     }
-
-    @Override public void draw(Canvas c) {
-      Rect b = getBounds();
-      NumberDrawer.draw(c, b.width(), b.height(), b.left, b.top, Number.getNodes(number));
-    }
-
-    @Override public void setAlpha(int i) {
-    }
-
-    @Override public void setColorFilter(ColorFilter c) {
-      colorFilter = c;
-      invalidateSelf();
-    }
-
-    @Override public int getOpacity() {
-      return 0;
-    }
-  }
-
-  private static void r(Integer... o) {
-    p.reset();
-    ps.reset();
-    p.setAntiAlias(true);
-    ps.setAntiAlias(true);
-    p.setStyle(Paint.Style.FILL);
-    ps.setStyle(Paint.Style.STROKE);
-    for (Integer i : o) {
-      switch (i) {
-        case 0:
-          ps.setStrokeJoin(Paint.Join.MITER);
-          break;
-        case 1:
-          ps.setStrokeMiter(4.0f * od);
-          break;
-        case 2:
-          ps.setStrokeCap(Paint.Cap.BUTT);
-          break;
-        case 3:
-          ps.setColor(Color.argb(0, 0, 0, 0));
-          break;
-      }
-    }
-  }
 }

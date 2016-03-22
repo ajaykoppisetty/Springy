@@ -7,9 +7,11 @@ import android.support.annotation.ColorInt;
  */
 public class Theme {
 
+    public String name;
     public int color;
 
-    public Theme(@ColorInt int color) {
+    public Theme(String name, @ColorInt int color) {
+        this.name = name;
         this.color = color;
     }
 

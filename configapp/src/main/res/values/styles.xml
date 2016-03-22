@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Activity" parent="AppTheme">
+        <!--Interesting bits in v21-->
+    </style>
+
 </resources>

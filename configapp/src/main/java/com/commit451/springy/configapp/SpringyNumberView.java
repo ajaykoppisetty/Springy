@@ -3,7 +3,9 @@ package com.commit451.springy.configapp;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.text.format.Time;
 import android.util.AttributeSet;
 import android.view.View;
@@ -56,7 +58,9 @@ public class SpringyNumberView extends View {
         setWillNotDraw(false);
 
         mPaint = new Paint();
-
+        mPaint.setColor(Color.WHITE);
+        mPaint.setTypeface(Typeface.DEFAULT);
+        mPaint.setAntiAlias(true);
     }
 
     public void update(Time time) {
