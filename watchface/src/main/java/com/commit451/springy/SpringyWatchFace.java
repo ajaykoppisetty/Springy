@@ -96,6 +96,7 @@ public class SpringyWatchFace extends CanvasWatchFaceService {
         public void onCreate(SurfaceHolder holder) {
             super.onCreate(holder);
 
+            mTime = new Time();
             mMute = getInterruptionFilter() == WatchFaceService.INTERRUPTION_FILTER_NONE;
             handleConfigUpdated();
 
@@ -113,7 +114,6 @@ public class SpringyWatchFace extends CanvasWatchFaceService {
             super.onDestroy();
             unregisterSystemSettingsListener();
             unregisterSharedPrefsListener();
-            unregisterTimeZoneReceiver();
             destroyMuzei();
         }
 
@@ -406,7 +406,7 @@ public class SpringyWatchFace extends CanvasWatchFaceService {
                 mBackgroundPaint.setColor(Color.BLACK);
                 mDrawMuzeiBitmap = true;
             } else {
-                mBackgroundPaint.setColor(getResources().getColor(theme.color));
+                mBackgroundPaint.setColor(theme.color);
                 mDrawMuzeiBitmap = false;
             }
         }
