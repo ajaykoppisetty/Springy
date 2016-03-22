@@ -92,49 +92,5 @@ public class BaseFillMode extends AbstractFillMode {
         }
       }
     }
-
-    float[][] penPosFromAfter = PathNodeUtils.calculatePenPosition(from);
-    float[][] penPosToAfter = PathNodeUtils.calculatePenPosition(to);
-
-    if ((penPosFromAfter[penPosFromAfter.length - 1][0] == penPosFrom[penPosFrom.length - 1][0])
-        && (penPosFromAfter[penPosFromAfter.length - 1][1] == penPosFrom[penPosFrom.length - 1][1])
-        && (penPosToAfter[penPosToAfter.length - 1][0] == penPosTo[penPosTo.length - 1][0])
-        && (penPosToAfter[penPosToAfter.length - 1][1] == penPosTo[penPosTo.length - 1][1])) {
-
-      System.out.println("Injection completed correctly!");
-    } else {
-      System.out.println("PROBLEM during injection!");
-      System.out.println("PenPos from");
-      StringBuffer sb = new StringBuffer();
-      int i = 0;
-      for (float[] coord : penPosFrom) {
-        sb.append((++i) + "p. " + coord[0] + " , " + coord[1] + "\n");
-      }
-      System.out.println(sb.toString());
-
-      System.out.println("PenPos fromAfter");
-      sb = new StringBuffer();
-      i = 0;
-      for (float[] coord : penPosFromAfter) {
-        sb.append((++i) + "p. " + coord[0] + " , " + coord[1] + "\n");
-      }
-      System.out.println(sb.toString());
-
-      System.out.println("PenPos to");
-      sb = new StringBuffer();
-      i = 0;
-      for (float[] coord : penPosTo) {
-        sb.append((++i) + "p. " + coord[0] + " , " + coord[1] + "\n");
-      }
-      System.out.println(sb.toString());
-
-      System.out.println("PenPos toAfter");
-      sb = new StringBuffer();
-      i = 0;
-      for (float[] coord : penPosToAfter) {
-        sb.append((++i) + "p. " + coord[0] + " , " + coord[1] + "\n");
-      }
-      System.out.println(sb.toString());
-    }
   }
 }

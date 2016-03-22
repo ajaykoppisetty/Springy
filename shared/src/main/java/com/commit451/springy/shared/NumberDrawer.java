@@ -39,7 +39,7 @@ public final class NumberDrawer {
   private static final Matrix m = new Matrix();
   private static float od;
 
-  private static @ColorInt int strokeColor = Color.parseColor("#00ffff");
+  private static @ColorInt int strokeColor = Color.parseColor("#ffffff");
 
   public static void draw(Canvas c, int w, int h, int dx, int dy, PathParser.PathDataNode[] nodes) {
     float ow = 132f;

@@ -71,10 +71,7 @@ public class SpringyNumber {
         mNodes = Number.getNodes(mNumber);
     }
 
-    public void onDraw(Canvas canvas, int width, int height, int paddingLeft, int paddingRight, int paddingTop, int paddingBottom) {
-        int finalWidth = width - paddingLeft - paddingRight;
-        int finalHeight = height - paddingTop - paddingBottom;
-
-        NumberDrawer.draw(canvas, finalWidth, finalHeight, paddingLeft, paddingTop, mNodes);
+    public void onDraw(Canvas canvas, int width, int height, int dx, int dy) {
+        NumberDrawer.draw(canvas, width, height, dx, dy, mNodes);
     }
 }

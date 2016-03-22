@@ -53,11 +53,9 @@ public final class VectAlign {
     PathParser.PathDataNode[] fromList = PathParser.createNodesFromPathData(from);
     PathParser.PathDataNode[] toList = PathParser.createNodesFromPathData(to);
 
-    System.out.println("Sequences sizes: " + fromList.length + " / " + toList.length);
 
     if (PathParser.canMorph(fromList, toList)) {
       result = new String[] { from, to };
-      System.out.println(" >> Paths are already morphable!!! Leaving sequences untouched <<");
     } else {
 
       //Aligning
@@ -67,7 +65,6 @@ public final class VectAlign {
       ArrayList<PathParser.PathDataNode> alignedTo = null;
 
       for (int i = 0; i < MAX_ALIGN_ITERATIONS && !equivalent; i++) {
-        System.out.println(i + ". align iteration...");
         NWAlignment nw = new NWAlignment(PathNodeUtils.transform(fromList, extraCloneNodes, true),
             PathNodeUtils.transform(toList, extraCloneNodes, true));
         nw.align();
@@ -76,19 +73,11 @@ public final class VectAlign {
         equivalent = PathNodeUtils.isEquivalent(nw.getOriginalFrom(), nw.getAlignedFrom())
             && PathNodeUtils.isEquivalent(nw.getOriginalTo(), nw.getAlignedTo());
 
-        if (equivalent) {
-          System.out.println("Alignment found!");
-          System.out.println(PathNodeUtils.pathNodesToString(nw.getAlignedFrom(), true));
-          System.out.println(PathNodeUtils.pathNodesToString(nw.getAlignedTo(), true));
-        }
         extraCloneNodes++;
       }
 
       if (!equivalent) {
-        System.err.println("Unable to NW-align lists!");
         return null;
-      } else {
-        System.out.println("Sequence aligned! (" + alignedFrom.size() + " elements)");
       }
 
       AbstractFillMode fillMode = null;

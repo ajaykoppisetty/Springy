@@ -3,10 +3,12 @@ package com.commit451.springy.configapp;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.format.Time;
+import android.view.View;
 
-import com.commit451.springy.shared.GoogleIO2016NumberView;
-import com.commit451.springy.shared.Number;
+import com.commit451.adapterlayout.AdapterLinearLayout;
+import com.commit451.springy.shared.Theme;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,12 +17,16 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Bind(R.id.second0)
-    GoogleIO2016NumberView mSecond0;
-    @Bind(R.id.second1)
-    GoogleIO2016NumberView mSecond1;
+    @Bind(R.id.toolbar)
+    Toolbar mToolbar;
     @Bind(R.id.springy)
     SpringyNumberView mSpringyNumberView;
+    @Bind(R.id.list)
+    AdapterLinearLayout mList;
+    @Bind(R.id.background)
+    View mBackground;
+
+    ThemeAdapter mThemeAdapter;
 
     Time mTime;
 
@@ -45,6 +51,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        mToolbar.setNavigationIcon(R.drawable.ic_done_24dp);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+        mThemeAdapter = new ThemeAdapter(new ThemeAdapter.Listener() {
+            @Override
+            public void onThemeClicked(Theme theme) {
+                mBackground.setBackgroundColor(theme.color);
+            }
+        });
+        mList.setAdapter(mThemeAdapter);
 
         mTime = new Time();
         mTimerHandler = new Handler();
@@ -54,9 +75,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateTime() {
         mTime.setToNow();
-
-        mSecond0.animateTo(Number.VALUES[mTime.second / 10]);
-        mSecond1.animateTo(Number.VALUES[mTime.second%10]);
         mSpringyNumberView.update(mTime);
     }
 }

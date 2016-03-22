@@ -171,11 +171,9 @@ public class PathNodeUtils {
   static void simplify(ArrayList<PathParser.PathDataNode> from,
       ArrayList<PathParser.PathDataNode> to) {
     if (from.size() != to.size()) {
-      System.err.println("Cannot simplify lists of nodes of different sizes");
       return;
     }
 
-    System.out.println("Simplify lists with size " + from.size());
 
     boolean removeIndexes[] = new boolean[from.size()];
     int last = from.size() - 1; //avoid last
@@ -194,8 +192,6 @@ public class PathNodeUtils {
         if (removeIndexes[i++]) it.remove();
       }
     }
-
-    System.out.println("Final size after simplify is " + from.size());
   }
 
   public static float[][] calculatePenPosition(ArrayList<PathParser.PathDataNode> sequence) {

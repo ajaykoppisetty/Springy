@@ -3,6 +3,7 @@ package com.commit451.springy.configapp;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.text.format.Time;
 import android.util.AttributeSet;
 import android.view.View;
@@ -11,16 +12,18 @@ import com.commit451.springy.shared.*;
 import com.commit451.springy.shared.Number;
 
 /**
- * The view
- * <br>
- * Copyright 2016 <a href="http://www.ovenbits.com">Oven Bits</a>
- *
- * @author Jawn.
+ * The view which shows how the time will be rendered
  */
 public class SpringyNumberView extends View {
 
+    SpringyNumber mDigit1Hour;
+    SpringyNumber mDigit2Hour;
+    SpringyNumber mDigit1Minute;
+    SpringyNumber mDigit2Minute;
     SpringyNumber mDigit1Second;
     SpringyNumber mDigit2Second;
+
+    Paint mPaint;
 
     public SpringyNumberView(Context context) {
         super(context);
@@ -44,12 +47,23 @@ public class SpringyNumberView extends View {
     }
 
     private void init() {
+        mDigit1Hour = new SpringyNumber(Number.ZERO);
+        mDigit2Hour = new SpringyNumber(Number.ZERO);
+        mDigit1Minute = new SpringyNumber(Number.ZERO);
+        mDigit2Minute = new SpringyNumber(Number.ZERO);
         mDigit1Second = new SpringyNumber(Number.ZERO);
         mDigit2Second = new SpringyNumber(Number.ZERO);
         setWillNotDraw(false);
+
+        mPaint = new Paint();
+
     }
 
     public void update(Time time) {
+        mDigit2Hour.animateTo(Number.VALUES[time.hour % 10]);
+        mDigit1Hour.animateTo(Number.VALUES[time.hour / 10]);
+        mDigit2Minute.animateTo(Number.VALUES[time.minute % 10]);
+        mDigit1Minute.animateTo(Number.VALUES[time.minute/10]);
         mDigit2Second.animateTo(Number.VALUES[time.second % 10]);
         mDigit1Second.animateTo(Number.VALUES[time.second/10]);
         invalidate();
@@ -58,10 +72,14 @@ public class SpringyNumberView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        int width = canvas.getWidth()/2;
-        int height = canvas.getHeight()/2;
-        mDigit1Second.onDraw(canvas, width, height, 0,0,0,0);
-        mDigit2Second.onDraw(canvas, width, height, 0,0,0,0);
+        int width = canvas.getWidth()/6;
+        int height = canvas.getHeight();
+        mDigit1Hour.onDraw(canvas, width, height, 0, 0);
+        mDigit2Hour.onDraw(canvas, width, height, width, 0);
+        mDigit1Minute.onDraw(canvas, width, height, 2*width, 0);
+        mDigit2Minute.onDraw(canvas, width, height, 3*width, 0);
+        mDigit1Second.onDraw(canvas, width, height, 4*width, 0);
+        mDigit2Second.onDraw(canvas, width, height, 5*width, 0);
         postInvalidate();
     }
 }
