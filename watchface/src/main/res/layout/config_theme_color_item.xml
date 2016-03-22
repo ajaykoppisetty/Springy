@@ -14,14 +14,16 @@
   limitations under the License.
   -->
 
-<resources>
+<net.nurik.roman.formwatchface.ColorItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:gravity="center">
 
-    <string name="app_name">Springy Watch Face</string>
-    <string name="watchface_label">Springy</string>
-    <string name="config_label">Springy Watch Face Configuration</string>
+    <ImageView
+        android:id="@+id/circle"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="8dp"
+        android:src="@drawable/circle" />
 
-    <string name="pref_show_notification_count_title">Unread count</string>
-    <string name="pref_show_date_title">Date</string>
-    <string name="pref_show_seconds_title">Seconds</string>
-
-</resources>
+</net.nurik.roman.formwatchface.ColorItemLayout>

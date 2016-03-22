@@ -44,8 +44,7 @@ import android.widget.ImageView;
 
 import com.commit451.springy.common.MathUtil;
 import com.commit451.springy.common.MuzeiArtworkImageLoader;
-import com.commit451.springy.common.Theme;
-import com.commit451.springy.common.Themes;
+import com.commit451.springy.common.config.Themes;
 import com.commit451.springy.common.config.ConfigHelper;
 import com.commit451.springy.common.config.UpdateConfigIntentService;
 
@@ -69,7 +68,7 @@ public class CompanionWatchFaceConfigActivity extends AppCompatActivity
     private ViewGroup mAnimateClockContainerView;
     private SpringyNumberView mAnimateClockView;
     private Animator mCurrentRevealAnimator;
-    private Theme mAnimatingTheme;
+    private Themes.Theme mAnimatingTheme;
 
     private MuzeiArtworkImageLoader.LoadedArtwork mMuzeiLoadedArtwork;
 
@@ -220,7 +219,7 @@ public class CompanionWatchFaceConfigActivity extends AppCompatActivity
         mThemeUiHolders.clear();
         mThemeItemContainer = (ViewGroup) findViewById(R.id.theme_list);
         LayoutInflater inflater = LayoutInflater.from(this);
-        for (final Theme theme : Themes.THEMES) {
+        for (final Themes.Theme theme : Themes.THEMES) {
             ThemeUiHolder holder = new ThemeUiHolder();
 
             holder.theme = theme;
@@ -256,7 +255,7 @@ public class CompanionWatchFaceConfigActivity extends AppCompatActivity
         LayoutInflater inflater = LayoutInflater.from(this);
         ThemeUiHolder holder = new ThemeUiHolder();
 
-        final Theme theme = Themes.MUZEI_THEME;
+        final Themes.Theme theme = Themes.MUZEI_THEME;
         holder.theme = theme;
         holder.container = inflater.inflate(R.layout.config_theme_item, mThemeItemContainer, false);
         holder.button = (ImageButton) holder.container.findViewById(R.id.button);
@@ -280,7 +279,7 @@ public class CompanionWatchFaceConfigActivity extends AppCompatActivity
         getLoaderManager().initLoader(LOADER_MUZEI_ARTWORK, null, this);
     }
 
-    private void updateAndPersistTheme(Theme theme) {
+    private void updateAndPersistTheme(Themes.Theme theme) {
         mSharedPreferences.edit().putString(ConfigHelper.KEY_THEME, theme.id).apply();
     }
 
@@ -354,7 +353,7 @@ public class CompanionWatchFaceConfigActivity extends AppCompatActivity
         }
     }
 
-    private void updatePreviewView(Theme theme, ViewGroup clockContainerView) {
+    private void updatePreviewView(Themes.Theme theme, ViewGroup clockContainerView) {
         if (theme == Themes.MUZEI_THEME) {
             if (mMuzeiLoadedArtwork != null) {
                 ((ImageView) clockContainerView.findViewById(R.id.background_image))
@@ -369,7 +368,7 @@ public class CompanionWatchFaceConfigActivity extends AppCompatActivity
     }
 
     private static class ThemeUiHolder {
-        Theme theme;
+        Themes.Theme theme;
         View container;
         ImageButton button;
         boolean selected;

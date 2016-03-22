@@ -14,14 +14,15 @@
   limitations under the License.
   -->
 
-<resources>
+<android.support.wearable.view.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <string name="app_name">Springy Watch Face</string>
-    <string name="watchface_label">Springy</string>
-    <string name="config_label">Springy Watch Face Configuration</string>
+    <android.support.wearable.view.WearableListView
+        android:id="@+id/wearable_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_box="left|right" />
 
-    <string name="pref_show_notification_count_title">Unread count</string>
-    <string name="pref_show_date_title">Date</string>
-    <string name="pref_show_seconds_title">Seconds</string>
-
-</resources>
+</android.support.wearable.view.BoxInsetLayout>

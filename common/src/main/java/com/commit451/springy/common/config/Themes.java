@@ -1,6 +1,7 @@
-package com.commit451.springy.common;
+package com.commit451.springy.common.config;
 
 import android.graphics.Color;
+import android.support.annotation.ColorInt;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,5 +40,20 @@ public class Themes {
         }
 
         return THEMES_BY_ID.get(id);
+    }
+
+    /**
+     * A class to hold a color configuration
+     */
+    public static class Theme {
+
+        public String id;
+        public int color;
+
+        public Theme(String id, @ColorInt int color) {
+            this.id = id;
+            this.color = color;
+        }
+
     }
 }
