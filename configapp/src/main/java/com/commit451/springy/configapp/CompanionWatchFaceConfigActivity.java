@@ -28,10 +28,12 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.Time;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +50,7 @@ import com.commit451.springy.common.config.ConfigHelper;
 import com.commit451.springy.common.config.UpdateConfigIntentService;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class CompanionWatchFaceConfigActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<MuzeiArtworkImageLoader.LoadedArtwork> {
@@ -69,6 +72,29 @@ public class CompanionWatchFaceConfigActivity extends AppCompatActivity
     private Theme mAnimatingTheme;
 
     private MuzeiArtworkImageLoader.LoadedArtwork mMuzeiLoadedArtwork;
+
+    private long mInterval = TimeUnit.SECONDS.toMillis(1);
+    private Handler mTimerHandler;
+    Time mTime;
+
+    private Runnable mTimeChecker = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                updateTime();
+            } finally {
+                // 100% guarantee that this always happens, even if
+                // your update method throws an exception
+                mTimerHandler.postDelayed(mTimeChecker, mInterval);
+            }
+        }
+    };
+
+    private void updateTime() {
+        mTime.setToNow();
+        mMainClockView.update(mTime);
+        mAnimateClockView.update(mTime);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,6 +174,11 @@ public class CompanionWatchFaceConfigActivity extends AppCompatActivity
                 mAnimateClockView.setTranslationX(translationX);
             }
         });
+
+        mTime = new Time();
+        mTimerHandler = new Handler();
+
+        mTimeChecker.run();
     }
 
     @Override
